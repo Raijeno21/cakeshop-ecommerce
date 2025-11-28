@@ -1,5 +1,11 @@
-const Checkout = () => {
-  return <div>Checkout</div>;
+import Category from "./components/Category";
+
+const Explore = () => {
+  return (
+    <main className="">
+      <Category />
+    </main>
+  );
 };
 
-export default Checkout;
+export default Explore;

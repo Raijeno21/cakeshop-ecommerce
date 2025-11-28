@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased pt-5`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased pt-5 px-2 bg-gray-200`}
       >
         <PhoneNav />
         {children}
