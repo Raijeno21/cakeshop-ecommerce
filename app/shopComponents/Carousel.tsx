@@ -24,7 +24,7 @@ const Carousel = () => {
   return (
     <section className="flex mt-5 w-full overflow-hidden flex-col">
       <div
-        className="flex transition ease-in-out duration-300 h-20 rounded-sm"
+        className="flex transition ease-in-out duration-300 h-30 rounded-sm"
         style={{ transform: `translateX(-${carouselPage * 100}%)` }}
       >
         {carouselImages.map((img, i) => (

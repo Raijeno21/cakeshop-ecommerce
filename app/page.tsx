@@ -1,10 +1,11 @@
 import { icon } from "@/src/svgIcons";
 import Link from "next/link";
-import Carousel from "./homeComponents/Carousel";
+import Carousel from "./shopComponents/Carousel";
+import Chocolate from "./shopComponents/ChocolateCakes";
 
 const Shop = () => {
   return (
-    <main className="px-5 text-xs">
+    <main className="px-5 text-xs pb-20">
       <div className="border rounded-md p-1 flex gap-2 justify-center">
         <span className="h-8 aspect-square block">{icon.magnifyGlass}</span>
         <input
@@ -15,6 +16,10 @@ const Shop = () => {
       </div>
       <div>
         <Carousel />
+        <Chocolate />
+        <Chocolate />
+        <Chocolate />
+        <Chocolate />
       </div>
     </main>
   );
