@@ -1,4 +1,5 @@
-export const product = [
+import { ProductDetailType } from "../dataTypes/interfaces";
+export const product: ProductDetailType[] = [
   {
     id: 0,
     productName: "Chocolate0",
@@ -15,7 +16,7 @@ export const product = [
     category: "chocolate",
     price: 23,
     inventoryStatus: 5,
-    rating: 5,
+    rating: 4,
     createdAt: 3234,
     img: "./fakeData/choco.jpeg",
   },
@@ -61,7 +62,8 @@ export const product = [
   },
   {
     id: 6,
-    category: "chocolate6",
+    productName: "Chocolate6",
+    category: "chocolate",
     price: 23,
     inventoryStatus: 5,
     rating: 5,
