@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { icon } from "../svgIcons";
 const PhoneNav = () => {
   const navigation = [
-    { name: "Shop", icon: icon.shop, link: "/shop" },
+    { name: "Shop", icon: icon.shop, link: "/" },
     { name: "Explore", icon: icon.searchIcon, link: "/explore" },
     { name: "Cart", icon: icon.cart, link: "/carts" },
     { name: "Favorite", icon: icon.heart, link: "/favorite" },
