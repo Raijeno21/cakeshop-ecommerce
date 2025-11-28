@@ -11,9 +11,13 @@ const Chocolate = () => {
         {product.map((prod) => (
           <div
             key={prod.id}
-            className="min-w-40 aspect-4/5 border border-gray-300 rounded-md p-2"
+            className="min-w-40 aspect-4/5 border border-gray-300 rounded-md p-2 flex flex-col justify-between"
           >
             <img src={prod.img} className="w-full rounded-md" />
+            <div className="text-gray-500">
+              <h3 className="font-semibold text-md">{prod.productName}</h3>
+              <p>₱ {prod.price}</p>
+            </div>
           </div>
         ))}
       </div>
