@@ -8,7 +8,7 @@ const Category = () => {
     {
       name: "Red Velvet",
       image: "./category/redvelvet.jpeg",
-      bg: "bg-destructive/50",
+      bg: "bg-destructive/70",
     },
     { name: "Mango", image: "./category/mango.jpeg", bg: "bg-yellow-500" },
     { name: "Ube", image: "./category/ubecake.jpeg", bg: "bg-purple-800/50" },

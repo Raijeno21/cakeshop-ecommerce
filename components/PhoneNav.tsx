@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { icon } from "../svgIcons";
+import { icon } from "../src/svgIcons";
 const PhoneNav = () => {
   const navigation = [
     { name: "Shop", icon: icon.shop, link: "/" },
@@ -12,6 +12,7 @@ const PhoneNav = () => {
   ];
   const location = usePathname();
   console.log(location);
+
   return (
     <nav className="w-full h-16 text-sm fixed bottom-0 flex justify-between px-5 rounded-t-xl bg-gray-200 shadow">
       {navigation.map((nav, i) => (

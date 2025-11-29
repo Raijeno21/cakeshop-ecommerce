@@ -1,7 +1,7 @@
 "use client";
 import { createPortal } from "react-dom";
 import { useLayoutEffect, useState } from "react";
-import { useProductDetailStore } from "@/src/fakeData/zustand/useProductDetailStore";
+import { useProductDetailStore } from "@/src/zustand/useProductDetailStore";
 import { icon } from "@/src/svgIcons";
 import { Button } from "@/components/ui/button";
 
