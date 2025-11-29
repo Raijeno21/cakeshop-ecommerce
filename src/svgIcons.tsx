@@ -1028,4 +1028,16 @@ export const icon = {
       />
     </svg>
   ),
+
+  minusIcon: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="100%"
+      height="100%"
+      viewBox="0 0 32 32"
+      fill="currentColor"
+    >
+      <path d="M26 18H6v-4h20v4z" />
+    </svg>
+  ),
 };
