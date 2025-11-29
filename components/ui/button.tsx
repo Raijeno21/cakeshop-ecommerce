@@ -22,11 +22,11 @@ const buttonVariants = cva(
         ghost: "bg-none ",
         link: "text-primary underline-offset-4 hover:underline",
         primary:
-          "text-white bg-chart-2/90 hover:bg-chart-2 transition duration-300 ease-in-out",
+          "text-white bg-chart-2/90 hover:bg-chart-2 transition duration-300 ease-in-out px-5 py-2 rounded-sm",
         transparent: "bg-transparent",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        default: "",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
