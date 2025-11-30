@@ -5,6 +5,8 @@ import { useState } from "react";
 import { ProductDetailType } from "@/src/dataTypes/interfaces";
 import ProductDetail from "./ProductDetail";
 import ProductsByCategory from "./ProdcutsByCategory";
+import { Button } from "@/components/ui/button";
+import { icon } from "@/src/svgIcons";
 const Chocolate = () => {
   const setProductDetail = useProductDetailStore(
     (state) => state.setProductDetails
@@ -39,9 +41,14 @@ const Chocolate = () => {
             onClick={() => handleShowProduct(prod)}
           >
             <img src={prod.img} className="w-full rounded-md object-cover" />
-            <div className="text-gray-500">
-              <h3 className="font-semibold text-md">{prod.productName}</h3>
-              <p>₱ {prod.price}</p>
+            <div className="text-gray-500 flex justify-between">
+              <div>
+                <h3 className="font-semibold text-md">{prod.productName}</h3>
+                <p>₱ {prod.price}</p>
+              </div>
+              <Button variant={"primary"} className="p-2 ">
+                {icon.plus}
+              </Button>
             </div>
           </div>
         ))}
