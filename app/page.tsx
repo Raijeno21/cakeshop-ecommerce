@@ -1,7 +1,7 @@
 import { icon } from "@/src/svgIcons";
-import Link from "next/link";
-import Carousel from "./shopComponents/Carousel";
-import Chocolate from "./shopComponents/ChocolateCakes";
+import Carousel from "./(main)/shopComponents/Carousel";
+import Chocolate from "./(main)/shopComponents/ChocolateCakes";
+import PhoneNav from "@/components/PhoneNav";
 
 const Shop = () => {
   return (
@@ -21,6 +21,7 @@ const Shop = () => {
         <Chocolate />
         <Chocolate />
       </div>
+      <PhoneNav />
     </main>
   );
 };

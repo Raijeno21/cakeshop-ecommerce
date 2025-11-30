@@ -13,7 +13,7 @@ const CartItems = () => {
             <div className="w-full flex justify-between items-center">
               <p className="text-sm font-semibold">{cart.productName}</p>
               <Button variant={"destructive"} className="h-6 w-6 p-2 ">
-                {icon.x}
+                {icon.deleteIcon}
               </Button>
             </div>
             <div className="flex justify-between w-full items-center">

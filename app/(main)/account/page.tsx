@@ -13,7 +13,7 @@ const Account = () => {
     { name: "About", icon: icon.aboutIcon },
   ];
   return (
-    <main className="max-h-dvh ">
+    <main className="max-h-dvh h-dvh">
       <div className=" flex gap-3">
         <img src="./defaultProfile.avif" className=" h-20 aspect-square" />
         <div className="flex flex-col justify-center">

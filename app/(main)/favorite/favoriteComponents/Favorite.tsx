@@ -19,7 +19,7 @@ const Wishlist = () => {
                 Add to Cart
               </Button>
               <Button variant={"destructive"} className="p-2 rounded-full">
-                {icon.x}
+                {icon.deleteIcon}
               </Button>
             </div>
           </div>
