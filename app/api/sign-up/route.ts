@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { userSchema } from "@/src/dataTypes/schemas/zodSign-up";
 import prisma from "@/lib/prisma";
+import * as jwt from "jsonwebtoken";
 
 export const POST = async (req: Request) => {
   try {
@@ -36,11 +37,21 @@ export const POST = async (req: Request) => {
         password: hashedPword,
       },
     });
-
-    return NextResponse.json(
-      { message: "User created", result },
-      { status: 201 }
+    const token = jwt.sign(
+      { id: result.id, email: result.email },
+      process.env.JWT_SECRET!,
+      { expiresIn: "1h" }
     );
+
+    const res = NextResponse.json({ message: result });
+    res.cookies.set("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: true,
+      path: "/",
+      maxAge: 60 * 60,
+    });
+    return res;
   } catch (err) {
     return NextResponse.json({ message: err });
   }
