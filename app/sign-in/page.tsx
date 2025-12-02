@@ -1,6 +1,29 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+
 const Sign_in = () => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const [email, setEmail] = useState<string>("");
+  const [password, setPasswword] = useState<string>("");
+
+  const mutationFN = async () => {
+    const response = await fetch(`${apiUrl}/api/sign-in`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error);
+    }
+    return data;
+  };
+
   return (
     <main className="max-h-dvh flex items-center justify-center bg-gray-200 w-full h-dvh px-5">
       <form className="bg-white max-w-[400px] px-5 py-10 rounded-sm">
@@ -24,7 +47,7 @@ const Sign_in = () => {
         </div>
         <p className=" flex justify-center mt-5 text-xs">
           Don't have an account?{" "}
-          <Link href="/sign-up" className="text-chart-2 pl-2">
+          <Link href="/signUp" className="text-chart-2 pl-2">
             Sign up
           </Link>
         </p>

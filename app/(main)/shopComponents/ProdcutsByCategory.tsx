@@ -33,7 +33,9 @@ const ProductsByCategory = ({
               <p className="text-sm font-semibold">{prod.productName}</p>
               <div className="flex justify-between items-center w-full">
                 <span className="text-sm font-semibold">₱ {prod.price}</span>
-                <Button>{icon.plus}</Button>
+                <Button size={"xs"} variant={"primary"}>
+                  {icon.plus}
+                </Button>
               </div>
             </div>
           </div>

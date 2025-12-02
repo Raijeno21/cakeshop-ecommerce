@@ -46,7 +46,7 @@ const Chocolate = () => {
                 <h3 className="font-semibold text-md">{prod.productName}</h3>
                 <p>₱ {prod.price}</p>
               </div>
-              <Button variant={"primary"} className="p-2 ">
+              <Button variant={"primary"} size={"xs"}>
                 {icon.plus}
               </Button>
             </div>

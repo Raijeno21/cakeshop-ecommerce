@@ -20,39 +20,51 @@ export const POST = async (req: Request) => {
         { status: 400 }
       );
     }
+
     const isExist = await prisma.user.findUnique({ where: { email } });
+
     if (isExist) {
       return NextResponse.json(
-        {
-          error: "email already exist",
-        },
-        { status: 400 }
+        { error: "Email already exists" },
+        { status: 409 }
       );
     }
 
     const hashedPword = await bcrypt.hash(password, 10);
+
     const result = await prisma.user.create({
       data: {
         email,
         password: hashedPword,
       },
     });
+
     const token = jwt.sign(
       { id: result.id, email: result.email },
       process.env.JWT_SECRET!,
       { expiresIn: "1h" }
     );
 
-    const res = NextResponse.json({ message: result });
+    const res = NextResponse.json(
+      { message: "User created successfully", data: result },
+
+      { status: 201 }
+    );
+
     res.cookies.set("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: true,
+      sameSite: "strict",
       path: "/",
       maxAge: 60 * 60,
     });
+
     return res;
   } catch (err) {
-    return NextResponse.json({ message: err });
+    console.error(err);
+    return NextResponse.json(
+      { error: "Internal server error", details: err },
+      { status: 500 }
+    );
   }
 };
