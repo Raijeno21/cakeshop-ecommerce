@@ -25,9 +25,11 @@ const Wishlist = () => {
           </div>
         </div>
       ))}
-      <Button className="mx-auto mt-3" variant={"primary"}>
-        Add to Cart all
-      </Button>
+      <div className="px-10 mt-3">
+        <Button className="w-full py-4" variant={"primary"}>
+          Add to Cart all
+        </Button>
+      </div>
     </section>
   );
 };

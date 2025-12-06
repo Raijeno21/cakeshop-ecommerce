@@ -23,7 +23,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         primary:
           "text-white bg-chart-2/90 hover:bg-chart-2 transition duration-300 ease-in-out px-5 py-2 rounded-sm",
-        transparent: "bg-transparent",
+        transparent: "bg-transparent ",
       },
       size: {
         default: "",
