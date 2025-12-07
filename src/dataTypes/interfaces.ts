@@ -6,7 +6,7 @@ export interface ProductDetailType {
   inventoryStatus: number;
   rating: number;
   createdAt: number;
-  img: string;
+  image: string;
 }
 export interface CartDataType {
   id: number;

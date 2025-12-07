@@ -24,7 +24,7 @@ const ProductDetail = ({ isShow }: { isShow: (show: boolean) => void }) => {
       <div className=" flex flex-col gap-5 ">
         <div className="h-1/4 w-full relative flex items-center justify-center  mt-2 bg-gray-200 rounded-md p-2 ">
           <img
-            src={productDetail?.img}
+            src={productDetail?.image}
             className="h-full aspect-auto rounded-md "
           />
         </div>

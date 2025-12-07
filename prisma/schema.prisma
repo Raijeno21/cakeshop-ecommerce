@@ -32,11 +32,70 @@ model UserDetails {
   mobileNumber String
   address      String
   profileImage String
-
+  order Order[] @relation("UserOrder")
+  cartItems CartItems[] @relation("UserCart")
+  wishlist Wishlist[] @relation("UserWishlist")
   user User @relation(fields: [userId], references: [id])
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+model Items {
+  id String @id @default(uuid())
+  productName String
+  price Int
+  rating Int
+  image String
+  inventoryStatus Int
+  category String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CartItems {
+  id String @id @default(uuid())
+  userID String
+  productName String
+  productId String
+  image String
+  quantity Int
+  price Int
+  isCheckout Boolean
+  inventoryStatus Int
+  category String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user UserDetails @relation("UserCart",fields: [userID],references: [userId])
+}
+model Wishlist {
+   id String @id @default(uuid())
+  userID String
+  productName String
+  productId String
+  image String
+  price Int
+  inventoryStatus Int
+  category String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user UserDetails @relation("UserWishlist",fields: [userID], references: [userId])
+}
+
+model Order {
+   id String @id @default(uuid())
+  userID String
+  productName String
+  productId String
+  image String
+  quantity Int
+  price Int
+  isCheckout Boolean
+  inventoryStatus Int
+  category String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user UserDetails @relation("UserOrder",fields: [userID],references: [userId])
 }
