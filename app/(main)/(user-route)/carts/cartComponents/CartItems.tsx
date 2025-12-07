@@ -11,7 +11,7 @@ const CartItems = () => {
     return <div className="mt-10 flex flex-col gap-2">Nothing to show</div>;
   }
   const [isShowCart, setIsShowCart] = useState<boolean>(false);
-  const [isPaySuccess, setIsPaySuccess] = useState<boolean>(false);
+  const [isPaySuccess, setIsPaySuccess] = useState<boolean>(true);
   const [isPaying, setIsPaying] = useState<boolean>(false);
 
   return (

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const Sign_in = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -11,6 +12,8 @@ const Sign_in = () => {
   const [password, setPasswword] = useState<string>("");
   const [passwordPlaceHolder, SetPasswordPlaceholder] = useState<string>("");
   const [emailPlaceholder, setEmailPlaceHolder] = useState<string>("");
+
+  const router = useRouter();
 
   const mutationFN = async () => {
     const response = await fetch(`${apiUrl}/api/sign-in`, {
@@ -23,6 +26,7 @@ const Sign_in = () => {
     if (!response.ok) {
       throw new Error(data.error);
     }
+    router.push("/");
     return data;
   };
   const { mutate, isPending } = useMutation({
@@ -63,7 +67,7 @@ const Sign_in = () => {
           value={email}
           placeholder={emailPlaceholder}
           type="email"
-          className="border-b border-black/20 w-full p-2 mb-2 placeholder:text-red-500 italic"
+          className="border-b border-black/20 w-full p-2 mb-2 placeholder:text-red-500 placeholder:italic"
           onChange={(e) => {
             setEmail(e.target.value);
             setEmailPlaceHolder("");
@@ -83,8 +87,16 @@ const Sign_in = () => {
         />
         <p className=" text-xs flex justify-end mt-2">Forgot Password?</p>
         <div className="flex justify-center mt-5">
-          <Button className="px-10" variant={"primary"}>
-            Log in
+          <Button
+            className="px-10 w-full py-1 h-10"
+            variant={"primary"}
+            disabled={isPending}
+          >
+            {isPending ? (
+              <div className=" h-full aspect-square classicSpinner bg-white"></div>
+            ) : (
+              <p>Sign In</p>
+            )}
           </Button>
         </div>
         <p className=" flex justify-center mt-5 text-xs">

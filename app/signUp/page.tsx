@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { userSchema } from "@/src/dataTypes/schemas/zodSign-up";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const Sign_up = () => {
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
@@ -13,7 +14,7 @@ const Sign_up = () => {
   const [retypePassword, setRetypePassword] = useState<string>("");
   const [emailPlaceholder, setEmailPlaceHolder] = useState<string>("");
   const [passwordPlaceHolder, SetPasswordPlaceholder] = useState<string>("");
-
+  const router = useRouter();
   const mutateFN = async () => {
     const response = await fetch(`${apiURL}/api/sign-up`, {
       method: "POST",
@@ -26,18 +27,18 @@ const Sign_up = () => {
     if (!response.ok) {
       throw new Error(res.error);
     }
+    router.push("/");
 
     return res;
   };
 
-  const { mutate, data, isPending } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ["signUp"],
     mutationFn: mutateFN,
-    onSuccess: (res) => {
+    onSuccess: () => {
       setEmail("");
       setPassword("");
       setRetypePassword("");
-      console.log(res);
     },
     onError: (error) => {
       setEmail("");
@@ -115,8 +116,16 @@ const Sign_up = () => {
           <span className="text-chart-2"> Privacy Policy</span>
         </p>
         <div className=" flex items-center justify-center p-3">
-          <Button variant={"primary"} className="px-10 py-2">
-            Sign up
+          <Button
+            className="px-10 w-full py-1 h-10"
+            variant={"primary"}
+            disabled={isPending}
+          >
+            {isPending ? (
+              <div className=" h-full aspect-square classicSpinner bg-white"></div>
+            ) : (
+              <p>Sign up</p>
+            )}
           </Button>
         </div>
         <p className="flex justify-center text-sm items-end ">

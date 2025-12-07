@@ -1,6 +1,7 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { icon } from "@/src/svgIcons";
-
+import { useRouter } from "next/navigation";
 const Account = () => {
   const menu = [
     { name: "Orders", icon: icon.bag },
@@ -12,6 +13,21 @@ const Account = () => {
     { name: "Help", icon: icon.helpIcon },
     { name: "About", icon: icon.aboutIcon },
   ];
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const router = useRouter();
+  const logOut = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/api/logout`, {
+        method: "POST",
+      });
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+      router.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <main className="max-h-dvh h-dvh">
       <div className=" flex gap-3">
@@ -38,7 +54,10 @@ const Account = () => {
         ))}
       </div>
       <div className=" mt-5 flex items-center justify-center ">
-        <Button className="px-10 py-3 flex gap-3 rounded-sm text-base">
+        <Button
+          className="px-10 py-3 flex gap-3 rounded-sm text-base"
+          onClick={logOut}
+        >
           <span className="text-destructive">{icon.logout}</span>Log-out
         </Button>
       </div>
