@@ -63,7 +63,7 @@ model CartItems {
   image String
   quantity Int
   price Int
-  isCheckout Boolean
+  isCheckout Boolean @default(false)
   inventoryStatus Int
   category String
   createdAt DateTime @default(now())
@@ -84,18 +84,30 @@ model Wishlist {
   user UserDetails @relation("UserWishlist",fields: [userID], references: [userId])
 }
 
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
 model Order {
-   id String @id @default(uuid())
-  userID String
-  productName String
-  productId String
-  image String
-  quantity Int
-  price Int
-  isCheckout Boolean
-  inventoryStatus Int
-  category String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user UserDetails @relation("UserOrder",fields: [userID],references: [userId])
+  id              String      @id @default(uuid())
+  userID          String
+  productId       String
+  productName     String
+  image           String
+  quantity        Int
+  price     Int
+  totalPrice          Int
+  category        String
+  orderStatus    OrderStatus @default(PENDING)
+  paymentMethod   String?
+  paymentId       String?
+  shippingAddress String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  user UserDetails @relation("UserOrder", fields: [userID], references: [userId])
 }
