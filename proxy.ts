@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export const proxy = (req: NextRequest) => {
-  const token = req.cookies.get("token")?.value;
+  // const token = req.cookies.get("token")?.value;
 
-  if (!token) {
-    return NextResponse.redirect(new URL("/sign-in", req.url));
-  }
+  // if (!token) {
+  //   return NextResponse.redirect(new URL("/sign-in", req.url));
+  // }
 
   return NextResponse.next();
 };

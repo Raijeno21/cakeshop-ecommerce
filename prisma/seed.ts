@@ -1,11 +1,11 @@
-import prisma from "@/lib/prisma";
-import {
-  CartDataType,
-  OrderType,
-  ProductDetailType,
-  WishlistType,
-} from "@/src/dataTypes/interfaces";
-
+// import prisma from "@/lib/prisma";
+// import {
+//   CartDataType,
+//   OrderType,
+//   ProductDetailType,
+//   WishlistType,
+// } from "@/src/dataTypes/interfaces";
+import { OrderStatus } from "@/src/generated/prisma/enums";
 // const generateItems = async () => {
 //     const newArr: ProductDetailType[] = [];
 //     const category = ["Red Velvet", "Chocolate", "Mango","Ube","Mocha","Caramel"];
@@ -251,32 +251,32 @@ import {
 //   updatedAt DateTime @updatedAt
 //   user UserDetails @relation("UserWishlist",fields: [userID], references: [userId])
 
-const generateOrders = async () => {
-  const user = await prisma.user.findMany({ select: { id: true } });
-  const items = await prisma.items.findMany({ take: 20 });
-  // 16
-  console.log(user);
+// const generateOrders = async () => {
+//   const user = await prisma.user.findMany({ select: { id: true } });
+//   const items = await prisma.items.findMany({ take: 20 });
+//   // 16
+//   console.log(user);
 
-  const newArr: OrderType[] = [];
-  const isCheckout = [true, false];
-  const status = ["PENDING", "PROCESSING", "DELIVIRED", "SHIPPED", "CANCELLED"];
-  for (let i = 0; i < 90; i++) {
-    const newUser = user[Math.floor(Math.random() * 16)];
-    const newItem = items[Math.floor(Math.random() * 20)];
-    const obj = {} as OrderType;
+//   const newArr: OrderType[] = [];
+//   const isCheckout = [true, false];
+//   const status = ["PENDING", "PROCESSING", "DELIVIRED", "SHIPPED", "CANCELLED"];
+//   for (let i = 0; i < 90; i++) {
+//     const newUser = user[Math.floor(Math.random() * 16)];
+//     const newItem = items[Math.floor(Math.random() * 20)];
+//     const obj = {} as OrderType;
 
-    obj.userID = newUser.id;
-    obj.productName = newItem.productName;
-    obj.productId = newItem.id;
-    obj.image = newItem.image;
-    obj.quantity = Math.floor(Math.random() * 10 + 1);
-    obj.price = Math.floor(Math.random() * 96 + 5);
-    obj.totalPrice = obj.quantity * obj.price;
-    obj.category = newItem.category;
+//     obj.userID = newUser.id;
+//     obj.productName = newItem.productName;
+//     obj.productId = newItem.id;
+//     obj.image = newItem.image;
+//     obj.quantity = Math.floor(Math.random() * 10 + 1);
+//     obj.price = Math.floor(Math.random() * 96 + 5);
+//     obj.totalPrice = obj.quantity * obj.price;
+//     obj.category = newItem.category;
 
-    newArr.push(obj);
-  }
-  console.log(newArr);
-  await prisma.order.createMany({ data: newArr });
-};
-generateOrders();
+//     newArr.push(obj);
+//   }
+//   console.log(newArr);
+//   await prisma.order.createMany({ data: newArr });
+// };
+// generateOrders();
