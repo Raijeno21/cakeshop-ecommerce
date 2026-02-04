@@ -1,12 +1,16 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { cartData } from "@/src/fakeData/fakeData";
+
 import { icon } from "@/src/svgIcons";
 import { useState } from "react";
 import Checkout from "./Checkout";
 import SuccesPay from "./SuccessPay";
 import FailPay from "./FailPay";
+import { useCartsQuery } from "@/services/useCartsQueryMutations";
+
 const CartItems = () => {
+  const { data } = useCartsQuery("126d0ef8-dafc-4331-8abc-6e015023effc");
+  const cartData = data;
   if (!cartData || cartData.length === 0) {
     return <div className="mt-10 flex flex-col gap-2">Nothing to show</div>;
   }
