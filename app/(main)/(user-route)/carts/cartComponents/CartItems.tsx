@@ -19,7 +19,7 @@ const CartItems = () => {
       {cartData.map((cart) => (
         <div className="w-full flex border border-black/20 " key={cart.id}>
           <div className="w-1/4 p-1">
-            <img src={cart.img} className="w-full rounded-sm object-cover" />
+            <img src={cart.image} className="w-full rounded-sm object-cover" />
           </div>
           <div className="flex-1 p-2 flex flex-col justify-between ">
             <div className="w-full flex justify-between items-center">

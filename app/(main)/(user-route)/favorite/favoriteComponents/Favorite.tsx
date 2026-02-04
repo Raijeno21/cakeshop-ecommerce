@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { product } from "@/src/fakeData/fakeData";
 import { icon } from "@/src/svgIcons";
 const Wishlist = () => {
   return (
@@ -7,7 +6,7 @@ const Wishlist = () => {
       {product.map((prod) => (
         <div key={prod.id} className="border-y border-black/20 w-full flex ">
           <div className="w-1/4 p-1">
-            <img src={prod.img} className="rounded-sm" />
+            <img src={prod.image} className="rounded-sm" />
           </div>
           <div className="w-full flex flex-col justify-between p-2">
             <div className="flex-1 flex justify-between items-center">

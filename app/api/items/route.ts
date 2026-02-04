@@ -1,6 +1,4 @@
 import prisma from "@/lib/prisma";
-import { error } from "console";
-import { Caramel } from "next/font/google";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
@@ -19,8 +17,8 @@ export const GET = async () => {
           where: { category: cat },
           take: 15,
           orderBy: { productName: "desc" },
-        })
-      )
+        }),
+      ),
     );
     return NextResponse.json({
       redvelvet: items[0],
