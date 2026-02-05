@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import { CartDataType } from "@/src/dataTypes/interfaces";
-const apiUrl = process.env.NEXT_PUBLIC_API_URL + "/api/carts";
+const api = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = `${api}/api/carts`;
 
 export const useCartsMutations = () => {
   const queryClient = useQueryClient();
@@ -73,7 +74,8 @@ export const useCartsQuery = (id: string) => {
   return useQuery<CartDataType[], Error>({
     queryKey: ["cartItems", id],
     queryFn: async (): Promise<CartDataType[]> => {
-      const response = await fetch("/api/cart?id=" + id); // replace with your API
+      const response = await fetch(`${apiUrl}/?userID=${id}`);
+      console.log(id);
       if (!response.ok) throw new Error("Error fetching cart items");
       return response.json();
     },

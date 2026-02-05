@@ -11,7 +11,6 @@ const PhoneNav = () => {
     { name: "Account", icon: icon.user, link: "/account" },
   ];
   const location = usePathname();
-  console.log(location);
 
   return (
     <nav className="inset-x-0 h-16 text-sm fixed bottom-0 flex justify-between px-5 rounded-t-xl bg-gray-200 shadow">
