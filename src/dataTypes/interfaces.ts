@@ -58,3 +58,8 @@ export interface OrderType {
   createdAt?: Date;
   updatedAt?: Date;
 }
+export interface UpdateCartType {
+  id: string;
+  quantity: number;
+  newQty: number;
+}

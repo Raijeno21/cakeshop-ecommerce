@@ -3,10 +3,12 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req: Request) => {
   const params = new URL(req.url).searchParams;
-  const id = params.get("id");
+  const id = params.get("userID");
+
   try {
     const result = await prisma.cartItems.findMany({
       where: { userID: id as string },
+      orderBy: { createdAt: "desc" },
     });
     if (!result || result.length === 0) {
       return NextResponse.json(

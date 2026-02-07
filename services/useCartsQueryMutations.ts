@@ -1,6 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
-import { CartDataType } from "@/src/dataTypes/interfaces";
+import { CartDataType, UpdateCartType } from "@/src/dataTypes/interfaces";
+import { Questrial } from "next/font/google";
+
+import { updateQuantity } from "@/src/customhooks/useUpdateQuantity";
 const api = process.env.NEXT_PUBLIC_API_URL;
 const apiUrl = `${api}/api/carts`;
 
@@ -28,13 +31,14 @@ export const useCartsMutations = () => {
   });
 
   const updateCartItem = useMutation({
-    mutationFn: async (cartData: any) => {
+    mutationFn: async ({ id, quantity, newQty }: UpdateCartType) => {
+      const newQuantity = updateQuantity(quantity, newQty);
       const response = await fetch(apiUrl, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(cartData),
+        body: JSON.stringify({ id, quantity: newQuantity }),
       });
       if (!response.ok) {
         throw new Error("Error updating cart item");
@@ -62,7 +66,6 @@ export const useCartsMutations = () => {
       return response.json();
     },
     onSuccess: () => {
-      console.log("Item removed from cart successfully");
       queryClient.invalidateQueries({ queryKey: ["cartItems"] });
     },
   });
