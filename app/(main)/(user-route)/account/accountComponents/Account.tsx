@@ -37,16 +37,15 @@ const Account = () => {
   if (isPending) {
     return <div>Loading...</div>;
   }
-  console.log(userData);
   return (
     <main className="max-h-dvh h-dvh">
       <div className=" flex gap-3">
         <img src="./defaultProfile.avif" className=" h-20 aspect-square" />
         <div className="flex flex-col justify-center">
           <p className="font-semibold  text-xl">
-            {userData.details ? userData.details.name : "Anonymous User"}
+            {userData?.details ? userData.details.name : "Anonymous User"}
           </p>
-          <p className="text-gray-500">{userData.email}</p>
+          <p className="text-gray-500">{userData?.email}</p>
         </div>
       </div>
       <div className="flex flex-col ">

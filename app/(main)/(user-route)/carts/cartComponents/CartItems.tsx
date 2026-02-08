@@ -1,17 +1,23 @@
 "use client";
 import { Button } from "@/components/ui/button";
-
 import { icon } from "@/src/svgIcons";
-import { useState } from "react";
+import { use, useState } from "react";
 import Checkout from "./Checkout";
 import SuccesPay from "./SuccessPay";
 import FailPay from "./FailPay";
 import { useCartsQuery } from "@/services/useCartsQueryMutations";
 import { useCartsMutations } from "@/services/useCartsQueryMutations";
+import { useQueryClient } from "@tanstack/react-query";
+import { CartDataType } from "@/src/dataTypes/interfaces";
+
 const CartItems = () => {
-  const { data } = useCartsQuery("c83a9dc2-4024-4662-9fac-6ae6e70eba4e");
-  const cartData = data;
-  const { addToCart, updateCartItem, removeFromCart } = useCartsMutations();
+  const [cartData, setCartData] = useState<CartDataType[]>();
+  const queryClient = useQueryClient();
+  const userID = queryClient.getQueryData(["user"]) as { id: string };
+  if (userID) {
+    const { data } = useCartsQuery(userID.id);
+  }
+  const { updateCartItem, removeFromCart } = useCartsMutations();
   const handleRemoveremoveFromCart = (id: string) => {
     removeFromCart.mutate({ id });
   };
@@ -32,7 +38,9 @@ const CartItems = () => {
   return (
     <section className="mt-10 flex flex-col gap-2">
       {cartData
-        .sort((a, b) => (a.createdAt! > b.createdAt! ? 1 : -1))
+        .sort((a: { createdAt?: any }, b: { createdAt?: any }) =>
+          a.createdAt! > b.createdAt! ? 1 : -1,
+        )
         .map((cart) => (
           <div className="w-full flex border border-black/20 " key={cart.id}>
             <div className="w-1/4 p-1">

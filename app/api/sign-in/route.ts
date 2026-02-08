@@ -62,7 +62,6 @@ export const GET = async (req: Request) => {
       where: { id: decoded.id },
       select: { id: true, email: true, details: true },
     });
-    console.log(user);
     return NextResponse.json({ user });
   } catch (err) {
     return NextResponse.json({ user: null });
