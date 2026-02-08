@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/prisma";
 import * as jwt from "jsonwebtoken";
-
+import { cookies } from "next/headers";
 interface ReqType {
   email: string;
   password: string;
@@ -43,5 +43,28 @@ export const POST = async (req: Request) => {
     return res;
   } catch (err) {
     return NextResponse.json({ message: err });
+  }
+};
+
+export const GET = async (req: Request) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  if (!token) {
+    return NextResponse.json({ user: null });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+      id: string;
+      email: string;
+    };
+
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+      select: { id: true, email: true, details: true },
+    });
+    console.log(user);
+    return NextResponse.json({ user });
+  } catch (err) {
+    return NextResponse.json({ user: null });
   }
 };

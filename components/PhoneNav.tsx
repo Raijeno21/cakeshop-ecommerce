@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { icon } from "../src/svgIcons";
+import { useValidateUserQuery } from "@/services/useValidateUserQuery";
 const PhoneNav = () => {
   const navigation = [
     { name: "Shop", icon: icon.shop, link: "/" },
@@ -11,6 +12,7 @@ const PhoneNav = () => {
     { name: "Account", icon: icon.user, link: "/account" },
   ];
   const location = usePathname();
+  useValidateUserQuery();
 
   return (
     <nav className="inset-x-0 h-16 text-sm fixed bottom-0 flex justify-between px-5 rounded-t-xl bg-gray-200 shadow">

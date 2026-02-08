@@ -6,7 +6,7 @@ import {
   useFavoritesMutations,
 } from "@/services/useFavoritesQueryMutations";
 import { useCartsMutations } from "@/services/useCartsQueryMutations";
-import { WishlistType, CartDataType } from "@/src/dataTypes/interfaces";
+import { CartDataType } from "@/src/dataTypes/interfaces";
 
 const Wishlist = () => {
   const { data, isPending } = useFavoritesQuery(

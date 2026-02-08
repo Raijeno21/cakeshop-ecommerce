@@ -2,9 +2,10 @@
 import { Button } from "@/components/ui/button";
 import { icon } from "@/src/svgIcons";
 import { useRouter } from "next/navigation";
+import { useValidateUserQuery } from "@/services/useValidateUserQuery";
 import { useQueryClient } from "@tanstack/react-query";
-
 const Account = () => {
+  const { data: userData, isPending } = useValidateUserQuery();
   const queryClient = useQueryClient();
   const menu = [
     { name: "Orders", icon: icon.bag },
@@ -16,7 +17,7 @@ const Account = () => {
     { name: "Help", icon: icon.helpIcon },
     { name: "About", icon: icon.aboutIcon },
   ];
-  const userData = queryClient.getQueryData(["user"]);
+
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
   const logOut = async () => {
@@ -33,13 +34,19 @@ const Account = () => {
       console.log(err);
     }
   };
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+  console.log(userData);
   return (
     <main className="max-h-dvh h-dvh">
       <div className=" flex gap-3">
         <img src="./defaultProfile.avif" className=" h-20 aspect-square" />
         <div className="flex flex-col justify-center">
-          <p className="font-semibold  text-xl">Jeno M. Carisma</p>
-          <p className="text-gray-500">jenopogi@gmail.com</p>
+          <p className="font-semibold  text-xl">
+            {userData.details ? userData.details.name : "Anonymous User"}
+          </p>
+          <p className="text-gray-500">{userData.email}</p>
         </div>
       </div>
       <div className="flex flex-col ">
