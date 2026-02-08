@@ -2,7 +2,10 @@
 import { Button } from "@/components/ui/button";
 import { icon } from "@/src/svgIcons";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
+
 const Account = () => {
+  const queryClient = useQueryClient();
   const menu = [
     { name: "Orders", icon: icon.bag },
     { name: "My Details", icon: icon.settings },
@@ -13,6 +16,7 @@ const Account = () => {
     { name: "Help", icon: icon.helpIcon },
     { name: "About", icon: icon.aboutIcon },
   ];
+  const userData = queryClient.getQueryData(["user"]);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
   const logOut = async () => {
@@ -23,6 +27,7 @@ const Account = () => {
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
+      queryClient.removeQueries({ queryKey: ["user"] });
       router.push("/");
     } catch (err) {
       console.log(err);
@@ -54,12 +59,24 @@ const Account = () => {
         ))}
       </div>
       <div className=" mt-5 flex items-center justify-center ">
-        <Button
-          className="px-10 py-3 flex gap-3 rounded-sm text-base"
-          onClick={logOut}
-        >
-          <span className="text-destructive">{icon.logout}</span>Log-out
-        </Button>
+        {userData ? (
+          <Button
+            className="px-10 py-3 flex gap-3 rounded-sm text-base"
+            onClick={logOut}
+          >
+            <span className="text-destructive">{icon.logout}</span>Log out
+          </Button>
+        ) : (
+          <Button
+            className="px-10 py-3 flex gap-3 rounded-sm text-base group"
+            onClick={() => router.push("/sign-in")}
+          >
+            <div className="text-green-500 group-hover:text-white group">
+              {icon.user}
+            </div>
+            Sign in
+          </Button>
+        )}
       </div>
     </main>
   );

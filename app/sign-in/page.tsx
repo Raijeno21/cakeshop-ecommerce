@@ -5,14 +5,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-
+import { useQueryClient } from "@tanstack/react-query";
 const Sign_in = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const [email, setEmail] = useState<string>("");
   const [password, setPasswword] = useState<string>("");
   const [passwordPlaceHolder, SetPasswordPlaceholder] = useState<string>("");
   const [emailPlaceholder, setEmailPlaceHolder] = useState<string>("");
-
+  const queryClient = useQueryClient();
   const router = useRouter();
 
   const mutationFN = async () => {
@@ -36,6 +36,7 @@ const Sign_in = () => {
       setEmail("");
       setPasswword("");
       console.log(data);
+      queryClient.setQueryData(["user"], data.user);
     },
     onError: (error) => {
       if (error.message === "* Password is incorrect") {

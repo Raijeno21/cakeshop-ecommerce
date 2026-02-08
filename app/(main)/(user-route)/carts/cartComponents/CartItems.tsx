@@ -32,7 +32,7 @@ const CartItems = () => {
   return (
     <section className="mt-10 flex flex-col gap-2">
       {cartData
-        .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
+        .sort((a, b) => (a.createdAt! > b.createdAt! ? 1 : -1))
         .map((cart) => (
           <div className="w-full flex border border-black/20 " key={cart.id}>
             <div className="w-1/4 p-1">
@@ -58,7 +58,7 @@ const CartItems = () => {
                     size={"xs"}
                     variant={"destructive"}
                     onClick={() =>
-                      handleUpdateCartItem(cart.id, cart.quantity, -1)
+                      handleUpdateCartItem(cart.id, cart.quantity!, -1)
                     }
                   >
                     {icon.minusIcon}
@@ -71,13 +71,13 @@ const CartItems = () => {
                     variant={"primary"}
                     className="p-0"
                     onClick={() =>
-                      handleUpdateCartItem(cart.id, cart.quantity, 1)
+                      handleUpdateCartItem(cart.id, cart.quantity!, 1)
                     }
                   >
                     {icon.plus}
                   </Button>
                 </div>
-                <div>₱ {cart.price * cart.quantity}</div>
+                <div>₱ {cart.price * cart.quantity!}</div>
               </div>
             </div>
           </div>

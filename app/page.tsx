@@ -22,7 +22,6 @@ const Shop = () => {
   if (isPending) {
     return <main>Loading</main>;
   }
-  console.log(data.redvelvet);
   return (
     <main className="px-5 text-xs pb-20">
       <div className="border rounded-md p-1 flex gap-2 justify-center">

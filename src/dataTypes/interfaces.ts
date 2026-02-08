@@ -15,12 +15,12 @@ export interface CartDataType {
   productName: string;
   productId: string;
   image: string;
-  quantity: number;
+  quantity?: number;
   price: number;
   inventoryStatus: number;
   category: string;
-  isCheckout: boolean;
-  createdAt: string;
+  isCheckout?: boolean;
+  createdAt?: Date;
 }
 export interface UserDetailsType {
   id: string;

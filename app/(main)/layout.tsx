@@ -1,5 +1,5 @@
 import PhoneNav from "@/components/PhoneNav";
-
+import { useQuery } from "@tanstack/react-query";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>

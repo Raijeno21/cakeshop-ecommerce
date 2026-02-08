@@ -16,23 +16,23 @@ export const POST = async (req: Request) => {
     if (!user) {
       return NextResponse.json(
         { error: "* Email does'nt exist" },
-        { status: 401 }
+        { status: 401 },
       );
     }
     const compare = await bcrypt.compare(password, user.password);
     if (!compare) {
       return NextResponse.json(
         { error: "* Password is incorrect" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET!,
-      { expiresIn: "1h" }
+      { expiresIn: "1h" },
     );
-    const res = NextResponse.json({ success: true });
+    const res = NextResponse.json({ user });
     res.cookies.set("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",

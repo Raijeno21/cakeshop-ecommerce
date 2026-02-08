@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req: Request) => {
   const params = new URL(req.url).searchParams;
-  const id = params.get("id");
+  const id = params.get("userID");
   console.log("Fetching favorites for user ID:", id);
   try {
     const result = await prisma.wishlist.findMany({
@@ -25,6 +25,7 @@ export const GET = async (req: Request) => {
 };
 export const POST = async (req: Request) => {
   const data = await req.json();
+  console.log(data);
 
   try {
     const result = await prisma.wishlist.create({

@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import { CartDataType, UpdateCartType } from "@/src/dataTypes/interfaces";
-import { Questrial } from "next/font/google";
 
 import { updateQuantity } from "@/src/customhooks/useUpdateQuantity";
 const api = process.env.NEXT_PUBLIC_API_URL;
@@ -78,7 +77,6 @@ export const useCartsQuery = (id: string) => {
     queryKey: ["cartItems", id],
     queryFn: async (): Promise<CartDataType[]> => {
       const response = await fetch(`${apiUrl}/?userID=${id}`);
-      console.log(id);
       if (!response.ok) throw new Error("Error fetching cart items");
       return response.json();
     },
