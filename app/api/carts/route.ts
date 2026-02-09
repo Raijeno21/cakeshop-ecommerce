@@ -27,6 +27,7 @@ export const GET = async (req: Request) => {
 
 export const POST = async (req: Request) => {
   const data = await req.json();
+  console.log(data);
 
   try {
     const result = await prisma.cartItems.create({

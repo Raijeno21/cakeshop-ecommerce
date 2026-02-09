@@ -10,7 +10,7 @@ export interface ProductDetailType {
   image: string;
 }
 export interface CartDataType {
-  id: string;
+  id?: string;
   userID: string;
   productName: string;
   productId: string;

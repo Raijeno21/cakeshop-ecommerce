@@ -32,7 +32,7 @@ const Wishlist = () => {
       quantity: 1,
     };
     addToCart.mutate(newProd);
-    removeFromFavorites.mutate(prod.id);
+    removeFromFavorites.mutate(prod.id!);
   };
   return (
     <section className="mt-10 flex flex-col gap-2 text-gray-500">

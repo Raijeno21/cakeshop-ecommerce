@@ -1,3 +1,4 @@
+"use client";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import { CartDataType, UpdateCartType } from "@/src/dataTypes/interfaces";
@@ -21,7 +22,9 @@ export const useCartsMutations = () => {
       if (!response.ok) {
         throw new Error("Error adding to cart");
       }
-      return response.json();
+      const data = await response.json();
+      console.log(data);
+      return data;
     },
     onSuccess: () => {
       console.log("Item added to cart successfully");
