@@ -30,6 +30,9 @@ export const useCartsMutations = () => {
       console.log("Item added to cart successfully");
       queryClient.invalidateQueries({ queryKey: ["cartItems"] });
     },
+    onError: (error: any) => {
+      console.error("Error adding to cart:", error);
+    },
   });
 
   const updateCartItem = useMutation({

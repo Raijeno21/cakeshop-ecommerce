@@ -19,7 +19,7 @@ export const GET = async (req: Request) => {
     return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json(
-      { message: "Error retrieving cart items" },
+      { message: "Error retrieving cart items", error },
       { status: 500 },
     );
   }
@@ -49,11 +49,8 @@ export const POST = async (req: Request) => {
       );
     }
     return NextResponse.json(result);
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Error adding to cart" },
-      { status: 500 },
-    );
+  } catch (error: any) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
 };
 
