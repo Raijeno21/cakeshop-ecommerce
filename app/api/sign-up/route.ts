@@ -3,7 +3,10 @@ import bcrypt from "bcryptjs";
 import { userSchema } from "@/src/dataTypes/schemas/zodSign-up";
 import prisma from "@/lib/prisma";
 import * as jwt from "jsonwebtoken";
-
+interface DataType {
+  email: string;
+  password: string;
+}
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
@@ -17,22 +20,22 @@ export const POST = async (req: Request) => {
           error: "Validation failed",
           details: validation.error.issues,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    const isExist = await prisma.user.findUnique({ where: { email } });
+    const isExist = await prisma.userDetails.findUnique({ where: { email } });
 
     if (isExist) {
       return NextResponse.json(
         { error: "Email already exists" },
-        { status: 409 }
+        { status: 409 },
       );
     }
 
     const hashedPword = await bcrypt.hash(password, 10);
 
-    const result = await prisma.user.create({
+    const result = await prisma.userDetails.create({
       data: {
         email,
         password: hashedPword,
@@ -42,13 +45,13 @@ export const POST = async (req: Request) => {
     const token = jwt.sign(
       { id: result.id, email: result.email },
       process.env.JWT_SECRET!,
-      { expiresIn: "1h" }
+      { expiresIn: "1h" },
     );
 
     const res = NextResponse.json(
       { message: "User created successfully", data: result },
 
-      { status: 201 }
+      { status: 201 },
     );
 
     res.cookies.set("token", token, {
@@ -64,7 +67,7 @@ export const POST = async (req: Request) => {
     console.error(err);
     return NextResponse.json(
       { error: "Internal server error", details: err },
-      { status: 500 }
+      { status: 500 },
     );
   }
 };

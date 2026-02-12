@@ -1,13 +1,17 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export const GET = async (req: Request) => {
-  const params = new URL(req.url).searchParams;
-  const id = params.get("userID");
+export const GET = async (
+  req: Request,
+  { params }: { params: { id: string } },
+) => {
+  const id = params.id;
+  console.log("id:", id);
+  console.log("typeof id:", typeof id);
 
   try {
     const result = await prisma.cartItems.findMany({
-      where: { userID: id as string },
+      where: { userID: id },
       orderBy: { createdAt: "desc" },
     });
     if (!result || result.length === 0) {

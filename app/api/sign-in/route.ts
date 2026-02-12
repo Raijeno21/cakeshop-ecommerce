@@ -12,7 +12,7 @@ export const POST = async (req: Request) => {
   const body: ReqType = await req.json();
   const { email, password } = body;
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.userDetails.findUnique({ where: { email } });
     if (!user) {
       return NextResponse.json(
         { error: "* Email does'nt exist" },
@@ -58,9 +58,9 @@ export const GET = async (req: Request) => {
       email: string;
     };
 
-    const user = await prisma.user.findUnique({
+    const user = await prisma.userDetails.findUnique({
       where: { id: decoded.id },
-      select: { id: true, email: true, details: true },
+      select: { id: true, email: true },
     });
     return NextResponse.json({ user });
   } catch (err) {

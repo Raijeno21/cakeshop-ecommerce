@@ -2,13 +2,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { icon } from "../src/svgIcons";
-import { useValidateUserQuery } from "@/services/useValidateUserQuery";
-
+import { useQueryClient } from "@tanstack/react-query";
 const PhoneNav = () => {
+  const queryClient = useQueryClient();
+  const userID = queryClient.getQueryData<{ id: string }>(["user"]);
+  console.log(userID?.id);
   const navigation = [
     { name: "Shop", icon: icon.shop, link: "/" },
     { name: "Explore", icon: icon.searchIcon, link: "/explore" },
-    { name: "Cart", icon: icon.cart, link: "/carts" },
+    { name: "Cart", icon: icon.cart, link: `/carts/${userID?.id}` },
     { name: "Favorite", icon: icon.heart, link: "/favorite" },
     { name: "Account", icon: icon.user, link: "/account" },
   ];

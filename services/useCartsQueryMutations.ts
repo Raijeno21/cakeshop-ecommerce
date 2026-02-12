@@ -82,7 +82,7 @@ export const useCartsQuery = (id: string) => {
   return useQuery<CartDataType[], Error>({
     queryKey: ["cartItems", id],
     queryFn: async (): Promise<CartDataType[]> => {
-      const response = await fetch(`${apiUrl}/?userID=${id}`);
+      const response = await fetch(`${apiUrl}/${id}`);
       if (!response.ok) throw new Error("Error fetching cart items");
       return response.json();
     },

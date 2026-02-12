@@ -12,30 +12,22 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
- model User {
-  id        String       @id @default(uuid())
-  email     String       @unique
-  password  String
-  role      Role         @default(USER)
-
-  details   UserDetails?
-
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-}
 
 model UserDetails {
   id           String   @id @default(uuid())
-  userId       String   @unique
-  firstName    String
-  lastName     String
-  mobileNumber String
-  address      String
-  profileImage String
+  email        String   @unique
+  password     String
+  firstName    String?
+  lastName     String?
+  mobileNumber String?
+  address      String?
+  profileImage String?
+  role         Role     @default(USER)
   order Order[] @relation("UserOrder")
   cartItems CartItems[] @relation("UserCart")
   wishlist Wishlist[] @relation("UserWishlist")
-  user User @relation(fields: [userId], references: [id])
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 }
 
 enum Role {
@@ -68,7 +60,7 @@ model CartItems {
   category String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user UserDetails @relation("UserCart",fields: [userID],references: [userId])
+  user UserDetails @relation("UserCart",fields: [userID],references: [id])
 }
 model Wishlist {
    id String @id @default(uuid())
@@ -81,7 +73,7 @@ model Wishlist {
   category String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user UserDetails @relation("UserWishlist",fields: [userID], references: [userId])
+  user UserDetails @relation("UserWishlist",fields: [userID], references: [id])
 }
 
 enum OrderStatus {
@@ -109,5 +101,5 @@ model Order {
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 
-  user UserDetails @relation("UserOrder", fields: [userID], references: [userId])
+  user UserDetails @relation("UserOrder", fields: [userID], references: [id])
 }
