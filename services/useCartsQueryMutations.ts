@@ -4,12 +4,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { CartDataType, UpdateCartType } from "@/src/dataTypes/interfaces";
 
 import { updateQuantity } from "@/src/customhooks/useUpdateQuantity";
-const api = process.env.NEXT_PUBLIC_API_URL;
-const apiUrl = `${api}/api/carts`;
 
 export const useCartsMutations = () => {
   const queryClient = useQueryClient();
-
+  const userID = queryClient.getQueryData(["user"]) as { id: string };
+  const api = process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl = `${api}/api/carts/${userID?.id}`;
   const addToCart = useMutation({
     mutationFn: async (cartData: any) => {
       const response = await fetch(apiUrl, {
@@ -82,7 +82,9 @@ export const useCartsQuery = (id: string) => {
   return useQuery<CartDataType[], Error>({
     queryKey: ["cartItems", id],
     queryFn: async (): Promise<CartDataType[]> => {
-      const response = await fetch(`${apiUrl}/${id}`);
+      const api = process.env.NEXT_PUBLIC_API_URL;
+      const apiUrl = `${api}/api/carts/${id}`;
+      const response = await fetch(apiUrl);
       if (!response.ok) throw new Error("Error fetching cart items");
       return response.json();
     },

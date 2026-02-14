@@ -12,7 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 const CartItems = () => {
   const queryClient = useQueryClient();
   const userID = queryClient.getQueryData(["user"]) as { id: string };
-  const { data, isPending } = useCartsQuery(userID?.id);
+  const { data, isPending } = useCartsQuery();
   const { updateCartItem, removeFromCart } = useCartsMutations();
   const handleRemoveremoveFromCart = (id: string) => {
     removeFromCart.mutate({ id });
