@@ -71,5 +71,7 @@ export const useFavoritesQuery = (userID: string) => {
       }
       return response.json();
     },
+    enabled: !!userID,
+    retry: false,
   });
 };

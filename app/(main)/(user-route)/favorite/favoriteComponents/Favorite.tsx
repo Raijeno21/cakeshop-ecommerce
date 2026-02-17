@@ -7,16 +7,14 @@ import {
 } from "@/services/useFavoritesQueryMutations";
 import { useCartsMutations } from "@/services/useCartsQueryMutations";
 import { CartDataType } from "@/src/dataTypes/interfaces";
+import { useValidateUserQuery } from "@/services/useValidateUserQuery";
 
 const Wishlist = () => {
-  const { data, isPending } = useFavoritesQuery(
-    "c83a9dc2-4024-4662-9fac-6ae6e70eba4e",
-  );
+  const { data: user } = useValidateUserQuery();
+  const { data, isPending, isError } = useFavoritesQuery(user?.id || "");
   const { removeFromFavorites, addToFavorites } = useFavoritesMutations();
   const { addToCart } = useCartsMutations();
-  if (!data || data.length === 0) {
-    return <div className="mt-10 flex flex-col gap-2">Nothing to show</div>;
-  }
+
   const handleDelete = (id: string) => {
     removeFromFavorites.mutate(id);
   };
@@ -34,6 +32,15 @@ const Wishlist = () => {
     addToCart.mutate(newProd);
     removeFromFavorites.mutate(prod.id!);
   };
+  if (isPending) {
+    return <div className="mt-10 flex flex-col gap-2">Loading...</div>;
+  }
+  if (!data || data.length === 0) {
+    return <div className="mt-10 flex flex-col gap-2">Nothing to show</div>;
+  }
+  if (isError) {
+    return <div className="mt-10 flex flex-col gap-2">Nothing to show</div>;
+  }
   return (
     <section className="mt-10 flex flex-col gap-2 text-gray-500">
       {data!.map((prod) => (
@@ -57,7 +64,10 @@ const Wishlist = () => {
               <Button
                 variant={"destructive"}
                 className="p-2 rounded-full"
-                onClick={() => handleDelete(prod.id)}
+                onClick={() => {
+                  handleDelete(prod.id!);
+                  console.log("Deleted from favorites:", prod.id);
+                }}
               >
                 {icon.deleteIcon}
               </Button>

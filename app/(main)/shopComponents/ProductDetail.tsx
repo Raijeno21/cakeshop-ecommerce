@@ -4,13 +4,34 @@ import { useLayoutEffect, useState } from "react";
 import { useProductDetailStore } from "@/src/zustand/useProductDetailStore";
 import { icon } from "@/src/svgIcons";
 import { Button } from "@/components/ui/button";
-
+import { useCartsMutations } from "@/services/useCartsQueryMutations";
+import { useFavoritesMutations } from "@/services/useFavoritesQueryMutations";
+import { useQueryClient } from "@tanstack/react-query";
 const ProductDetail = ({ isShow }: { isShow: (show: boolean) => void }) => {
   const [container, setContainer] = useState<HTMLElement | null>(null);
   const productDetail = useProductDetailStore((state) => state.productDetails);
+  const { addToFavorites } = useFavoritesMutations();
+  const queryClient = useQueryClient();
+  const user = queryClient.getQueryData(["user"]) as { id: string };
   useLayoutEffect(() => {
     setContainer(document.body);
   }, []);
+  const handleAddToCart = () => {
+    const { addToCart } = useCartsMutations();
+    console.log(productDetail);
+  };
+  const handleAddToFavorites = () => {
+    const newData = {
+      productId: productDetail?.id!,
+      userID: user.id,
+      productName: productDetail?.productName!,
+      image: productDetail?.image!,
+      price: productDetail?.price!,
+      inventoryStatus: productDetail?.inventoryStatus!,
+      category: productDetail?.category!,
+    };
+    addToFavorites.mutate(newData);
+  };
 
   if (!container) return null;
 
@@ -33,7 +54,12 @@ const ProductDetail = ({ isShow }: { isShow: (show: boolean) => void }) => {
             <h3 className="font-semibold text-lg">
               {productDetail?.productName}
             </h3>
-            <div className="h-6 aspect-square">{icon.heart}</div>
+            <button
+              className="h-10 aspect-square bg-green-500 p-2 rounded-full text-white"
+              onClick={handleAddToFavorites}
+            >
+              {icon.heart}
+            </button>
           </div>
           <div>
             <div className=" w-full flex justify-between items-center mt-2 ">
@@ -82,13 +108,17 @@ const ProductDetail = ({ isShow }: { isShow: (show: boolean) => void }) => {
           </div>
         </div>
         <div className="flex justify-center">
-          <Button className="py-5 px-8 text-lg" variant={"primary"}>
+          <Button
+            className="py-2 px-5 text-lg"
+            variant={"primary"}
+            onClick={handleAddToCart}
+          >
             Add to Basket
           </Button>
         </div>
       </div>
     </article>,
-    container
+    container,
   );
 };
 

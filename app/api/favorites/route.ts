@@ -31,7 +31,7 @@ export const POST = async (req: Request) => {
     const result = await prisma.wishlist.create({
       data: {
         userID: data.userID,
-        productId: data.id,
+        productId: data.productId,
         productName: data.productName,
         image: data.image,
         price: data.price,

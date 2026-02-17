@@ -33,7 +33,7 @@ export interface UserDetailsType {
 }
 
 export interface WishlistType {
-  id: string;
+  id?: string;
   userID: string;
   productName: string;
   productId: string;

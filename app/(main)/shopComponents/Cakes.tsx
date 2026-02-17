@@ -16,7 +16,6 @@ const Cakes = ({ Flavor }: { Flavor: ProductDetailType[] }) => {
   const { addToCart } = useCartsMutations();
   const queryClient = useQueryClient();
   const user = queryClient.getQueryData<UserDetailsType>(["user"]);
-  console.log(user?.id);
   const handleAddToCart = (formData: ProductDetailType) => {
     const newData = {
       id: formData.id,
