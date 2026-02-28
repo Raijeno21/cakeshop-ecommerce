@@ -56,31 +56,32 @@ const Cakes = ({ Flavor }: { Flavor: ProductDetailType[] }) => {
         </p>
       </div>
       <div className="flex overflow-x-auto gap-2 ">
-        {Flavor.map((prod) => (
-          <div
-            key={prod.id}
-            className="min-w-40 aspect-4/5 border border-gray-300 rounded-md p-2 flex flex-col justify-between"
-          >
-            <img
-              src={prod.image}
-              className="w-full rounded-md object-cover cursor-pointer"
-              onClick={() => handleShowProduct(prod)}
-            />
-            <div className="text-gray-500 flex justify-between">
-              <div>
-                <h3 className="font-semibold text-md">{prod.productName}</h3>
-                <p>₱ {prod.price}</p>
+        {Flavor &&
+          Flavor.map((prod) => (
+            <div
+              key={prod.id}
+              className="min-w-40 aspect-4/5 border border-gray-300 rounded-md p-2 flex flex-col justify-between"
+            >
+              <img
+                src={prod.image}
+                className="w-full rounded-md object-cover cursor-pointer"
+                onClick={() => handleShowProduct(prod)}
+              />
+              <div className="text-gray-500 flex justify-between">
+                <div>
+                  <h3 className="font-semibold text-md">{prod.productName}</h3>
+                  <p>₱ {prod.price}</p>
+                </div>
+                <Button
+                  variant={"primary"}
+                  size={"xs"}
+                  onClick={() => handleAddToCart(prod)}
+                >
+                  {icon.plus}
+                </Button>
               </div>
-              <Button
-                variant={"primary"}
-                size={"xs"}
-                onClick={() => handleAddToCart(prod)}
-              >
-                {icon.plus}
-              </Button>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </section>
   );

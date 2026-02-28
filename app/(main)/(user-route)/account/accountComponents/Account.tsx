@@ -4,11 +4,12 @@ import { icon } from "@/src/svgIcons";
 import { useRouter } from "next/navigation";
 import { useValidateUserQuery } from "@/services/useValidateUserQuery";
 import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 const Account = () => {
   const { data: userData, isPending } = useValidateUserQuery();
   const queryClient = useQueryClient();
   const menu = [
-    { name: "Orders", icon: icon.bag },
+    { name: "Orders", icon: icon.bag, link: "/orders" },
     { name: "My Details", icon: icon.settings },
     { name: "Delivery Address", icon: icon.location },
     { name: "Payment Methods", icon: icon.payIcon },
@@ -50,7 +51,8 @@ const Account = () => {
       </div>
       <div className="flex flex-col ">
         {menu.map((nav, i) => (
-          <div
+          <Link
+            href={nav.link ? nav.link : "#"}
             key={i}
             className="border-y flex justify-between items-center py-3"
           >
@@ -61,7 +63,7 @@ const Account = () => {
             <span className="block h-4 aspect-square -rotate-90">
               {icon.miniarrow2}
             </span>
-          </div>
+          </Link>
         ))}
       </div>
       <div className=" mt-5 flex items-center justify-center ">
