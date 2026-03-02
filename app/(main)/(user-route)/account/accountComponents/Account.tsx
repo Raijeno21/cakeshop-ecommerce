@@ -5,12 +5,13 @@ import { useRouter } from "next/navigation";
 import { useValidateUserQuery } from "@/services/useValidateUserQuery";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { link } from "fs";
 const Account = () => {
   const { data: userData, isPending } = useValidateUserQuery();
   const queryClient = useQueryClient();
   const menu = [
     { name: "Orders", icon: icon.bag, link: "/orders" },
-    { name: "My Details", icon: icon.settings },
+    { name: "My Details", icon: icon.settings, link: "/user-details" },
     { name: "Delivery Address", icon: icon.location },
     { name: "Payment Methods", icon: icon.payIcon },
     { name: "Promo Card", icon: icon.tag },
