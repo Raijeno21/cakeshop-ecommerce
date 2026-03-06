@@ -2,7 +2,7 @@ import OrderPage from "./orderComponents/OrderPage";
 
 const Orders = () => {
   return (
-    <div>
+    <div className="">
       <OrderPage />
     </div>
   );

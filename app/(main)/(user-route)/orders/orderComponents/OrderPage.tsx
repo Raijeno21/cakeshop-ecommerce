@@ -8,7 +8,7 @@ const OrderPage = () => {
       id: 1,
       productName: "Chocolate Cake",
       price: 20,
-      quantity: 1,
+      quantity: 100,
       status: "Delivered",
       img: "https://res.cloudinary.com/dhbvjqpi8/image/upload/v1765089840/images_1_ffkqei.jpg",
     },
@@ -46,17 +46,21 @@ const OrderPage = () => {
             key={order.id}
             className="border rounded-sm flex justify-between p-2 shadow-sm"
           >
-            <div>
+            <div className="w-3/4">
               <h2 className="font-semibold text-gray-400 text-xs">
                 {order.status}
               </h2>
-              <div className="pl-5 text-gray-500">
+              <div className="pl-5 text-gray-500 ">
                 <p>{order.productName}</p>
-                <div className=" flex justify-between">
-                  <p className="border-r border-black flex flex-1 justify-center">
+                <div className=" flex justify-between ">
+                  <p className=" flex-1 flex justify-end pr-3">
+                    Qty:
                     {order.quantity}
                   </p>
-                  <p className=" flex flex-1 justify-center">$ {order.price}</p>
+                  <div className="w-px border border-black"></div>
+                  <p className=" flex-1 flex justify-start pl-3">
+                    Price: $ {order.price}
+                  </p>
                 </div>
               </div>
             </div>
