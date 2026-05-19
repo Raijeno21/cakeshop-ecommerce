@@ -11,7 +11,7 @@ import { useValidateUserQuery } from "@/services/useValidateUserQuery";
 
 const Wishlist = () => {
   const { data: user } = useValidateUserQuery();
-  const { data, isPending, isError } = useFavoritesQuery(user?.id || "");
+  const { data, isLoading, isError } = useFavoritesQuery(user?.id || "");
   const { removeFromFavorites, addToFavorites } = useFavoritesMutations();
   const { addToCart } = useCartsMutations();
 
@@ -32,7 +32,7 @@ const Wishlist = () => {
     addToCart.mutate(newProd);
     removeFromFavorites.mutate(prod.id!);
   };
-  if (isPending) {
+  if (isLoading) {
     return <div className="mt-10 flex flex-col gap-2">Loading...</div>;
   }
   if (!data || data.length === 0) {

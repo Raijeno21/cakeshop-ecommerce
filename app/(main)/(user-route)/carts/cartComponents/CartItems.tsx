@@ -12,7 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 const CartItems = () => {
   const queryClient = useQueryClient();
   const userID = queryClient.getQueryData(["user"]) as { id: string };
-  const { data, isPending } = useCartsQuery();
+  const { data, isLoading } = useCartsQuery(userID?.id || "");
   const { updateCartItem, removeFromCart } = useCartsMutations();
   const handleRemoveremoveFromCart = (id: string) => {
     removeFromCart.mutate({ id });
@@ -31,7 +31,7 @@ const CartItems = () => {
   if (!data || data.length === 0) {
     return <div className="mt-10 flex flex-col gap-2">Nothing to show</div>;
   }
-  if (isPending) {
+  if (isLoading) {
     <div>Loading . . .</div>;
   }
   return (
