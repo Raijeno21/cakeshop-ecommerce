@@ -7,9 +7,9 @@ import { updateQuantity } from "@/src/customhooks/useUpdateQuantity";
 
 export const useCartsMutations = () => {
   const queryClient = useQueryClient();
-  const userID = queryClient.getQueryData(["user"]) as { id: string };
+
   const api = process.env.NEXT_PUBLIC_API_URL;
-  const apiUrl = `${api}/api/carts/${userID?.id}`;
+  const apiUrl = `${api}/api/carts/`;
   const addToCart = useMutation({
     mutationFn: async (cartData: any) => {
       const response = await fetch(apiUrl, {
@@ -18,16 +18,15 @@ export const useCartsMutations = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(cartData),
+        credentials: "include",
       });
       if (!response.ok) {
         throw new Error("Error adding to cart");
       }
       const data = await response.json();
-      console.log(data);
       return data;
     },
     onSuccess: () => {
-      console.log("Item added to cart successfully");
       queryClient.invalidateQueries({ queryKey: ["cartItems"] });
     },
     onError: (error: any) => {
@@ -78,15 +77,16 @@ export const useCartsMutations = () => {
   return { addToCart, updateCartItem, removeFromCart };
 };
 
-export const useCartsQuery = (id: string) => {
+export const useCartsQuery = () => {
   return useQuery<CartDataType[], Error>({
-    queryKey: ["cartItems", id],
+    queryKey: ["cartItems"],
     queryFn: async (): Promise<CartDataType[]> => {
       const api = process.env.NEXT_PUBLIC_API_URL;
-      const apiUrl = `${api}/api/carts/${id}`;
-      const response = await fetch(apiUrl);
+      const apiUrl = `${api}/api/carts`;
+      const response = await fetch(apiUrl, { credentials: "include" });
       if (!response.ok) throw new Error("Error fetching cart items");
       return response.json();
     },
+    staleTime: 1000 * 60 * 2,
   });
 };

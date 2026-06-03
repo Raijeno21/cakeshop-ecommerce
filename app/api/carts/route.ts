@@ -1,25 +1,29 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-
-export const GET = async (
-  req: Request,
-  { params }: { params: { id: string } },
-) => {
-  const id = params.id;
-  console.log("id:", id);
-  console.log("typeof id:", typeof id);
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
+export const GET = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  if (!token) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+  const decoded: any = jwt.decode(token);
+  const id = decoded.id;
 
   try {
     const result = await prisma.cartItems.findMany({
       where: { userID: id },
       orderBy: { createdAt: "desc" },
     });
+
     if (!result || result.length === 0) {
       return NextResponse.json(
         { message: "No items in cart" },
         { status: 404 },
       );
     }
+
     return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json(
@@ -28,7 +32,6 @@ export const GET = async (
     );
   }
 };
-
 export const POST = async (req: Request) => {
   const data = await req.json();
   console.log(data);

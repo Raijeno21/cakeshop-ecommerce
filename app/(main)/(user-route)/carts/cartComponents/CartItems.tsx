@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { icon } from "@/src/svgIcons";
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Checkout from "./Checkout";
 import SuccesPay from "./SuccessPay";
 import FailPay from "./FailPay";
@@ -12,7 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 const CartItems = () => {
   const queryClient = useQueryClient();
   const userID = queryClient.getQueryData(["user"]) as { id: string };
-  const { data, isLoading } = useCartsQuery(userID?.id || "");
+  const { data, isLoading } = useCartsQuery();
   const { updateCartItem, removeFromCart } = useCartsMutations();
   const handleRemoveremoveFromCart = (id: string) => {
     removeFromCart.mutate({ id });
@@ -34,6 +34,7 @@ const CartItems = () => {
   if (isLoading) {
     <div>Loading . . .</div>;
   }
+
   return (
     <section className="mt-10 flex flex-col gap-2">
       {userID?.id ? (

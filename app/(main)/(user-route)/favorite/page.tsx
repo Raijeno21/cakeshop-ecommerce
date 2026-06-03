@@ -1,4 +1,4 @@
-import Wishlist from "../favoriteComponents/Favorite";
+import Wishlist from "./favoriteComponents/Favorite";
 
 const Favorite = () => {
   return (

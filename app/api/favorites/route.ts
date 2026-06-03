@@ -1,10 +1,16 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
 
 export const GET = async (req: Request) => {
-  const params = new URL(req.url).searchParams;
-  const id = params.get("userID");
-  console.log("Fetching favorites for user ID:", id);
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  if (!token) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+  const decoded: any = jwt.decode(token);
+  const id = decoded.id;
   try {
     const result = await prisma.wishlist.findMany({
       where: { userID: id as string },

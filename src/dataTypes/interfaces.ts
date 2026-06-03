@@ -22,6 +22,7 @@ export interface CartDataType {
   isCheckout?: boolean;
   createdAt?: Date;
 }
+
 export interface UserDetailsType {
   id: string;
   userID: string;

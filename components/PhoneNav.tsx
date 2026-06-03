@@ -9,8 +9,8 @@ const PhoneNav = () => {
   const navigation = [
     { name: "Shop", icon: icon.shop, link: "/" },
     { name: "Explore", icon: icon.searchIcon, link: "/explore" },
-    { name: "Cart", icon: icon.cart, link: `/carts/${userID?.id}` },
-    { name: "Favorite", icon: icon.heart, link: `/favorite/${userID?.id}` },
+    { name: "Cart", icon: icon.cart, link: "/carts" },
+    { name: "Favorite", icon: icon.heart, link: "/favorite" },
     { name: "Account", icon: icon.user, link: "/account" },
   ];
   const location = usePathname();

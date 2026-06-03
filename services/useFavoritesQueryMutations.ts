@@ -65,7 +65,9 @@ export const useFavoritesQuery = (userID: string) => {
   return useQuery({
     queryKey: ["favorites", userID],
     queryFn: async (): Promise<WishlistType[]> => {
-      const response = await fetch(`/api/favorites?userID=${userID}`);
+      const response = await fetch("/api/favorites", {
+        credentials: "include",
+      });
       if (!response.ok) {
         throw new Error("Error fetching favorites");
       }
