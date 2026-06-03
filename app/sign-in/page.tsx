@@ -59,7 +59,7 @@ const Sign_in = () => {
   return (
     <main className="max-h-dvh flex items-center justify-center bg-gray-200 w-full h-dvh px-5">
       <form
-        className="bg-white max-w-[400px] px-5 py-10 rounded-sm"
+        className="bg-white max-w-100 px-5 py-10 rounded-sm"
         onSubmit={handleSubmit}
       >
         <label htmlFor="email">Email:</label>
