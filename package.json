@@ -9,15 +9,16 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@prisma/adapter-neon": "^7.8.0",
     "@prisma/adapter-pg": "^7.0.1",
-    "@prisma/client": "^7.0.1",
+    "@prisma/client": "^7.8.0",
     "@radix-ui/react-slot": "^1.2.4",
     "@tanstack/react-query": "^5.90.11",
     "@tanstack/react-query-devtools": "^5.91.1",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.4.2",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.555.0",
     "next": "16.0.5",
