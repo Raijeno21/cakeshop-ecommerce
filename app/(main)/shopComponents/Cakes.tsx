@@ -50,7 +50,7 @@ const Cakes = ({ Flavor }: { Flavor: ProductDetailType[] }) => {
   return (
     <section className=" mt-5">
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-semibold">{Flavor[0]?.category}</h1>
+        <h1 className="text-xl font-semibold">{Flavor?.[0]?.category}</h1>
         <p className="text-pink-500 text-sm" onClick={() => setIsSeeAll(true)}>
           See all
         </p>

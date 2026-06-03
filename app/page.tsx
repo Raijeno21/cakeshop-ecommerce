@@ -4,6 +4,7 @@ import { icon } from "@/src/svgIcons";
 import Carousel from "./(main)/shopComponents/Carousel";
 import PhoneNav from "@/components/PhoneNav";
 import Cakes from "./(main)/shopComponents/Cakes";
+import { useEffect } from "react";
 
 const Shop = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -19,6 +20,9 @@ const Shop = () => {
     queryKey: ["items"],
     queryFn: getItems,
   });
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   if (isPending) {
     return <main>Loading</main>;
   }
