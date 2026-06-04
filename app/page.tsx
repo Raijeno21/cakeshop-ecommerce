@@ -5,6 +5,8 @@ import Carousel from "./(main)/shopComponents/Carousel";
 import PhoneNav from "@/components/PhoneNav";
 import Cakes from "./(main)/shopComponents/Cakes";
 import { useEffect } from "react";
+import ShopSkeletonLoader from "@/components/loaders/shopSkeletonLoader";
+import Skeleton from "@/components/loaders/Skeleton";
 
 const Shop = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -16,15 +18,23 @@ const Shop = () => {
     }
     return res;
   };
-  const { data, isPending } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["items"],
     queryFn: getItems,
   });
   useEffect(() => {
     console.log(data);
   }, [data]);
-  if (isPending) {
-    return <main>Loading</main>;
+
+  if (isLoading) {
+    return (
+      <main>
+        <Skeleton>
+          <ShopSkeletonLoader />
+        </Skeleton>
+        <PhoneNav />
+      </main>
+    );
   }
   return (
     <main className="px-5 text-xs pb-20">
@@ -45,6 +55,7 @@ const Shop = () => {
         <Cakes Flavor={data.mocha} />
         <Cakes Flavor={data.caramel} />
       </div>
+
       <PhoneNav />
     </main>
   );
