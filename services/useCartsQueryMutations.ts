@@ -2,12 +2,11 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import { CartDataType, UpdateCartType } from "@/src/dataTypes/interfaces";
-
+import { useValidateUserQuery } from "./useValidateUserQuery";
 import { updateQuantity } from "@/src/customhooks/useUpdateQuantity";
 
 export const useCartsMutations = () => {
   const queryClient = useQueryClient();
-
   const api = process.env.NEXT_PUBLIC_API_URL;
   const apiUrl = `${api}/api/carts/`;
   const addToCart = useMutation({
@@ -71,6 +70,11 @@ export const useCartsMutations = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cartItems"] });
+      const currentCart =
+        queryClient.getQueryData<CartDataType[]>(["cartItems"]) || [];
+      if (currentCart.length === 1) {
+        queryClient.setQueryData(["cartItems"], []);
+      }
     },
   });
 
@@ -78,6 +82,8 @@ export const useCartsMutations = () => {
 };
 
 export const useCartsQuery = () => {
+  const { data: user } = useValidateUserQuery();
+
   return useQuery<CartDataType[], Error>({
     queryKey: ["cartItems"],
     queryFn: async (): Promise<CartDataType[]> => {
@@ -88,5 +94,7 @@ export const useCartsQuery = () => {
       return response.json();
     },
     staleTime: 1000 * 60 * 2,
+    enabled: !!user,
+    retry: 1,
   });
 };
