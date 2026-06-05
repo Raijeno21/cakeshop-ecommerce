@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { userSchema } from "@/src/dataTypes/schemas/zodSign-up";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { icon } from "@/src/svgIcons";
 
 const Sign_up = () => {
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
@@ -66,7 +67,13 @@ const Sign_up = () => {
   };
 
   return (
-    <main className="max-h-dvh flex items-center justify-center bg-gray-200 w-full h-dvh px-5">
+    <main className="max-h-dvh flex items-center justify-center bg-gray-200 w-full h-dvh px-5 relative">
+      <Link href={"/"}>
+        {" "}
+        <div className="absolute top-5 left-5 rotate-180 text-gray-400 border border-white py-2 px-4 rounded-sm bg-white ">
+          {icon.arrow}
+        </div>
+      </Link>
       <form
         className="bg-white max-w-[400px] px-5 py-10 rounded-sm"
         onSubmit={handleSubmit}
