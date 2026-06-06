@@ -10,7 +10,7 @@ const Account = () => {
   const { data: userData, isPending } = useValidateUserQuery();
   const queryClient = useQueryClient();
   const menu = [
-    { name: "Orders", icon: icon.bag, link: "/orders" },
+    { name: "Orders", icon: icon.bag, link: "/account/orders" },
     { name: "My Details", icon: icon.settings, link: "/user-details" },
     { name: "Delivery Address", icon: icon.location },
     { name: "Payment Methods", icon: icon.payIcon },

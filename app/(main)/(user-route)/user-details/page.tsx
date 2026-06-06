@@ -1,72 +1,44 @@
+import { icon } from "@/src/svgIcons";
+
 const UserDetails = () => {
+  const user = [
+    { id: 1, label: "Email", value: "jenopogi" },
+    { id: 2, label: "Contact Number", value: "09234567890" },
+    { id: 3, label: "Address", value: "Cebu City" },
+  ];
   return (
-    <section className="flex flex-col ">
-      <div className="bg-pink-200/50 pt-10 h-50 flex text-xl font-semibold text-gray-400 justify-center items-center rounded-sm">
+    <section className="flex flex-col gap-5 px-3">
+      <div className="bg-pink-200/50 p-5 flex flex-col gap-5  text-xl font-semibold text-gray-400 justify-center items-center rounded-sm">
         <img
           src="./defaultProfile.avif"
-          className="h-full aspect-square rounded-md"
+          className="h-40 aspect-square rounded-full "
         />
+        <div className="flex gap-3">
+          <p>Jeno</p>
+          <p>M.</p>
+          <p>Carisma</p>
+        </div>
       </div>
       <form className="bg-pink-200/50  flex flex-col gap-5 px-5 py-10 rounded-sm">
-        <div className="flex flex-col bg-white shadow rounded-sm pt-2">
-          <label htmlFor="name" className="w-full pl-2">
-            First Name
-          </label>
-          <input
-            type="text"
-            placeholder="Jeno"
-            className="h-10 pl-2 border border-transparent rounded focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-300"
-            id="name"
-          />
-        </div>
-
-        <div className="flex flex-col bg-white shadow rounded-sm pt-2">
-          <label htmlFor="lastName" className="w-full pl-2">
-            Last Name
-          </label>
-          <input
-            type="text"
-            placeholder="Jeno"
-            className="h-10 pl-2 border border-transparent rounded focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-300"
-            id="lastName"
-          />
-        </div>
-
-        <div className="flex flex-col bg-white shadow rounded-sm pt-2">
-          <label htmlFor="Email" className="w-full pl-2">
-            Email
-          </label>
-          <input
-            type="text"
-            placeholder="Jeno"
-            className="h-10 pl-2 border border-transparent rounded focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-300"
-            id="Email"
-          />
-        </div>
-
-        <div className="flex flex-col bg-white shadow rounded-sm pt-2">
-          <label htmlFor="contactnumber" className="w-full pl-2">
-            Contact Number
-          </label>
-          <input
-            type="text"
-            placeholder="Jeno"
-            className="h-10 pl-2 border border-transparent rounded focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-300"
-            id="contactnumber"
-          />
-        </div>
-
-        <div className="flex flex-col bg-white shadow rounded-sm pt-2">
-          <label htmlFor="address" className="w-full pl-2">
-            Address
-          </label>
-          <input
-            type="text"
-            placeholder="Jeno"
-            className="h-10 pl-2 border border-transparent rounded focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-300"
-            id="address"
-          />
-        </div>
+        {user.map((details) => (
+          <div
+            className="flex bg-white shadow rounded-sm pt-2 border border-black"
+            key={details.id}
+          >
+            <div className="w-10 h-10">{icon.email}</div>
+            <div className="flex flex-col gap-1 ">
+              <label htmlFor={details.label} className="w-full pl-2">
+                {details.label}
+              </label>
+              <input
+                type="text"
+                placeholder={details.value}
+                className="h-10 pl-2 border border-transparent rounded focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-300"
+                id={details.label}
+              />
+            </div>
+          </div>
+        ))}
       </form>
     </section>
   );

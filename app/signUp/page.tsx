@@ -75,7 +75,7 @@ const Sign_up = () => {
         </div>
       </Link>
       <form
-        className="bg-white max-w-[400px] px-5 py-10 rounded-sm"
+        className="bg-white max-w-100 px-5 py-10 rounded-sm"
         onSubmit={handleSubmit}
       >
         <label htmlFor="email">Email:</label>
