@@ -2,9 +2,9 @@ import { icon } from "@/src/svgIcons";
 
 const UserDetails = () => {
   const user = [
-    { id: 1, label: "Email", value: "jenopogi" },
-    { id: 2, label: "Contact Number", value: "09234567890" },
-    { id: 3, label: "Address", value: "Cebu City" },
+    { id: 1, label: "Email", value: "jenopogi", icon: icon.email },
+    { id: 2, label: "Contact Number", value: "09234567890", icon: icon.phone },
+    { id: 3, label: "Address", value: "Cebu City", icon: icon.location },
   ];
   return (
     <section className="flex flex-col gap-5 px-3">
@@ -22,12 +22,14 @@ const UserDetails = () => {
       <form className="bg-pink-200/50  flex flex-col gap-5 px-5 py-10 rounded-sm">
         {user.map((details) => (
           <div
-            className="flex bg-white shadow rounded-sm pt-2 border border-black"
+            className="flex bg-white w-full shadow rounded-sm"
             key={details.id}
           >
-            <div className="w-10 h-10">{icon.email}</div>
-            <div className="flex flex-col gap-1 ">
-              <label htmlFor={details.label} className="w-full pl-2">
+            <div className="w-15 aspect-square px-3 flex items-center justify-center">
+              {details.icon}
+            </div>
+            <div className="flex flex-col gap-1 w-4/5">
+              <label htmlFor={details.label} className="w-full pl-2 pt-2">
                 {details.label}
               </label>
               <input

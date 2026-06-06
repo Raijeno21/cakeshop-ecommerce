@@ -324,28 +324,31 @@ export const icon = {
       viewBox="0 0 34 45"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="flex items-center justify-center"
     >
-      <path
-        d="M2.65625 43.2188H31.3438"
-        stroke="currentColor"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M17 24.0938C18.6908 24.0938 20.3123 23.4221 21.5078 22.2266C22.7033 21.031 23.375 19.4095 23.375 17.7188C23.375 16.028 22.7033 14.4065 21.5078 13.2109C20.3123 12.0154 18.6908 11.3438 17 11.3438C15.3092 11.3438 13.6877 12.0154 12.4922 13.2109C11.2966 14.4065 10.625 16.028 10.625 17.7188C10.625 19.4095 11.2966 21.031 12.4922 22.2266C13.6877 23.4221 15.3092 24.0938 17 24.0938V24.0938Z"
-        stroke="currentColor"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M32.9375 17.7188C32.9375 32.0625 17 43.2188 17 43.2188C17 43.2188 1.0625 32.0625 1.0625 17.7188C1.0625 13.4919 2.74162 9.4381 5.73049 6.44924C8.71935 3.46037 12.7731 1.78125 17 1.78125C21.2269 1.78125 25.2807 3.46037 28.2695 6.44924C31.2584 9.4381 32.9375 13.4919 32.9375 17.7188V17.7188Z"
-        stroke="currentColor"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <g transform="scale(0.7) translate(5 6)">
+        <path
+          d="M2.65625 43.2188H31.3438"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M17 24.0938C18.6908 24.0938 20.3123 23.4221 21.5078 22.2266C22.7033 21.031 23.375 19.4095 23.375 17.7188C23.375 16.028 22.7033 14.4065 21.5078 13.2109C20.3123 12.0154 18.6908 11.3438 17 11.3438C15.3092 11.3438 13.6877 12.0154 12.4922 13.2109C11.2966 14.4065 10.625 16.028 10.625 17.7188C10.625 19.4095 11.2966 21.031 12.4922 22.2266C13.6877 23.4221 15.3092 24.0938 17 24.0938V24.0938Z"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M32.9375 17.7188C32.9375 32.0625 17 43.2188 17 43.2188C17 43.2188 1.0625 32.0625 1.0625 17.7188C1.0625 13.4919 2.74162 9.4381 5.73049 6.44924C8.71935 3.46037 12.7731 1.78125 17 1.78125C21.2269 1.78125 25.2807 3.46037 28.2695 6.44924C31.2584 9.4381 32.9375 13.4919 32.9375 17.7188V17.7188Z"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
     </svg>
   ),
   mail: (
@@ -1140,9 +1143,9 @@ export const icon = {
       <path
         d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7"
         stroke="#000000"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <rect
         x="3"
@@ -1151,8 +1154,8 @@ export const icon = {
         height="14"
         rx="2"
         stroke="#000000"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="1"
+        strokeLinecap="round"
       />
     </svg>
   ),
