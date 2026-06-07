@@ -10,7 +10,7 @@ const UserDetails = () => {
     <section className="flex flex-col gap-5 px-3">
       <div className="bg-pink-200/50 p-5 flex flex-col gap-5  text-xl font-semibold text-gray-400 justify-center items-center rounded-sm">
         <img
-          src="./defaultProfile.avif"
+          src="../defaultProfile.avif"
           className="h-40 aspect-square rounded-full "
         />
         <div className="flex gap-3">
@@ -28,7 +28,7 @@ const UserDetails = () => {
             <div className="w-15 aspect-square px-3 flex items-center justify-center">
               {details.icon}
             </div>
-            <div className="flex flex-col gap-1 w-4/5">
+            <div className="flex flex-col gap-1 w-4/5 border-l border-gray-300">
               <label htmlFor={details.label} className="w-full pl-2 pt-2">
                 {details.label}
               </label>

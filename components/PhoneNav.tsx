@@ -14,13 +14,19 @@ const PhoneNav = () => {
     { name: "Account", icon: icon.user, link: "/account" },
   ];
   const location = usePathname();
+  const isActive = (navlink: string) => {
+    if (navlink === "/account") {
+      return location.startsWith("/account");
+    }
+    return location === navlink;
+  };
 
   return (
     <nav className="inset-x-0 h-16 text-sm fixed bottom-0 flex justify-between px-5 rounded-t-xl bg-gray-200 shadow">
       {navigation.map((nav, i) => (
         <div
           className={`${
-            location === nav.link
+            isActive(nav.link)
               ? "bg-pink-500  text-white rounded-sm transition duration-300 ease-in-out "
               : ""
           }flex flex-1 items-center justify-center`}
